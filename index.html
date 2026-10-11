@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quonset Place — Steel Buildings Built to Last | Winnipeg, Manitoba</title>
 <meta name="description" content="Custom metal Quonset buildings in Winnipeg. Garages, workshops, barns, storage. Durable, affordable, winter-proof steel arch buildings.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23000'/%3E%3Ctext x='32' y='44' font-family='Arial Black,Arial' font-size='34' font-weight='900' fill='%23ff0000' text-anchor='middle'%3EQ%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jaykk99.github.io/quonset-place-site/">
+<meta property="og:title" content="Quonset Place — Steel Buildings Built to Last">
+<meta property="og:description" content="Custom metal Quonset buildings in Winnipeg. Garages, workshops, barns, storage. Engineered for Canadian winters, erected in days.">
+<meta property="og:image" content="https://jaykk99.github.io/quonset-place-site/assets/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quonset Place — Steel Buildings Built to Last">
+<meta name="twitter:description" content="Custom metal Quonset buildings in Winnipeg. Garages, workshops, barns, storage. Engineered for Canadian winters, erected in days.">
+<meta name="twitter:image" content="https://jaykk99.github.io/quonset-place-site/assets/hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -158,13 +169,14 @@ section{padding:110px 0}
 footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-size:14px}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
 </style>
+<noscript><style>.reveal{opacity:1;transform:none}.hero p.lead,.hero-ctas,.hero-stats,.scroll-hint{opacity:1}.hero h1 .line>span{transform:none}</style></noscript>
 </head>
 <body>
 
 <nav class="nav" id="nav">
   <div class="container nav-inner">
     <a href="#top" class="logo">quonset<span>place</span></a>
-    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
     <div class="nav-links" id="navLinks">
       <a href="#services">Services</a>
       <a href="#uses">Uses</a>
@@ -395,7 +407,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-siz
 // nav scroll state + mobile menu
 const nav=document.getElementById('nav'),burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
-burger.addEventListener('click',()=>navLinks.classList.toggle('open'));
+burger.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');burger.setAttribute('aria-expanded',open);});
 navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
 
 // hero parallax
@@ -427,7 +439,7 @@ document.getElementById('quoteForm').addEventListener('submit',e=>{
   e.preventDefault();
   const f=new FormData(e.target);
   const body='Name: '+f.get('name')+'%0D%0APhone: '+f.get('phone')+'%0D%0AType: '+f.get('type')+'%0D%0ADetails: '+(f.get('details')||'-');
-  location.href='mailto:quotes@quonsetplace.ca?subject=Quote%20Request%20—%20Quonset%20Place&body='+body;
+  location.href='mailto:thequonsetplace@hotmail.com?subject=Quote%20Request%20—%20Quonset%20Place&body='+body;
   document.getElementById('formOk').style.display='block';
   e.target.reset();
 });
