@@ -6,6 +6,10 @@
 <title>Quonset Place | Steel Buildings Built to Last | Winnipeg, Manitoba</title>
 <meta name="description" content="Custom metal Quonset buildings in Winnipeg. Garages, workshops, barns, storage. Durable, affordable, winter-proof steel arch buildings.">
 <meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://jaykk99.github.io/quonset-place-site/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"Quonset Place","url":"https://jaykk99.github.io/quonset-place-site/","telephone":"+1-204-972-0325","email":"thequonsetplace@hotmail.com","description":"Custom metal Quonset buildings in Winnipeg, Manitoba. Garages, workshops, barns, storage. Full builds and DIY kits.","areaServed":[{"@type":"City","name":"Winnipeg"},{"@type":"State","name":"Manitoba"}],"openingHours":"Mo-Sa 08:00-18:00"}
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23000'/%3E%3Ctext x='32' y='44' font-family='Arial Black,Arial' font-size='34' font-weight='900' fill='%23ff0000' text-anchor='middle'%3EQ%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jaykk99.github.io/quonset-place-site/">
@@ -34,6 +38,16 @@ img{max-width:100%;display:block}
 a{color:inherit}
 .container{max-width:1180px;margin:0 auto;padding:0 24px}
 ::selection{background:var(--red);color:#000000}
+.skip{position:absolute;left:-9999px;top:0;background:var(--red);color:#ffffff;padding:12px 22px;z-index:200;border-radius:0 0 12px 0;font-weight:700;text-decoration:none}
+.skip:focus{left:0}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto!important}
+  .hero-bg img{transform:none!important}
+  .marquee-track{animation:none!important}
+  .reveal{opacity:1;transform:none}
+}
 
 /* ---------- NAV ---------- */
 .nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .35s,border-color .35s,backdrop-filter .35s;border-bottom:1px solid transparent}
@@ -214,6 +228,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-siz
 <noscript><style>.reveal{opacity:1;transform:none}.hero p.lead,.hero-ctas,.hero-stats,.scroll-hint{opacity:1}.hero h1 .line>span{transform:none}</style></noscript>
 </head>
 <body>
+<a class="skip" href="#services">Skip to content</a>
 
 <nav class="nav" id="nav">
   <div class="container nav-inner">
@@ -552,6 +567,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-siz
   <div class="container foot">
     <a href="#top" class="logo" style="font-size:18px">quonset<span>place</span></a>
     <span>Steel buildings built to last, Winnipeg, Manitoba</span>
+    <span><a href="mailto:thequonsetplace@hotmail.com" style="color:var(--red);font-weight:600">thequonsetplace@hotmail.com</a> &middot; <a href="tel:+12049720325" style="color:var(--red);font-weight:600">204-972-0325</a></span>
     <span>&copy; 2026 Quonset Place</span>
   </div>
 </footer>

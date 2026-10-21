@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jaykk99.github.io/quonset-place-site/sitemap.xml
