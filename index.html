@@ -172,6 +172,30 @@ section{padding:110px 0}
 .form-ok{display:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,0,0,.5);color:#ffffff;padding:16px;border-radius:12px;margin-bottom:18px;font-weight:600}
 @media(max-width:860px){.contact-grid{grid-template-columns:1fr}.c-card{padding:32px 24px}}
 
+/* gallery */
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.gal{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;display:block;transition:transform .4s,box-shadow .4s}
+.gal:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.gal:hover img{transform:scale(1.05)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px;font-weight:600;font-size:15px;background:linear-gradient(transparent,rgba(0,0,0,.92))}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;z-index:100;padding:24px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:92vw;max-height:86vh;border-radius:12px}
+.lb-close{position:absolute;top:18px;right:24px;background:none;border:none;color:#ffffff;font-size:36px;cursor:pointer;line-height:1}
+.lb-cap{position:absolute;bottom:24px;color:#d4d4d4;font-size:15px}
+@media(max-width:860px){.gal-grid{grid-template-columns:1fr}}
+
+/* faq */
+.faq{max-width:840px;margin:0 auto}
+.faq details{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;transition:border-color .3s}
+.faq details[open]{border-color:var(--red)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 26px;font-weight:700;font-size:17px;font-family:'Archivo';display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--red);font-size:26px;font-weight:800;transition:transform .3s;line-height:1}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq-a{padding:0 26px 24px;color:var(--muted);font-size:16px}
+
 /* jobs */
 .jobs-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}
 .job-role{display:flex;gap:18px;align-items:flex-start;margin-bottom:24px}
@@ -251,7 +275,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-siz
         </div>
       </a>
       <a href="#contact" class="svc reveal d1">
-        <img src="assets/interior.jpg" alt="Finished Quonset interior">
+        <img loading="lazy" decoding="async" src="assets/interior.jpg" alt="Finished Quonset interior">
         <div class="svc-shade"></div>
         <div class="svc-body">
           <div class="svc-tag">02, DIY Friendly</div>
@@ -260,7 +284,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-siz
         </div>
       </a>
       <a href="#contact" class="svc reveal d2">
-        <img src="assets/build.jpg" alt="Quonset installation crew">
+        <img loading="lazy" decoding="async" src="assets/build.jpg" alt="Quonset installation crew">
         <div class="svc-shade"></div>
         <div class="svc-body">
           <div class="svc-tag">03, Fast Crew</div>
@@ -304,7 +328,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-siz
       </div>
     </div>
     <div class="feat reveal">
-      <div class="feat-img"><img src="assets/interior.jpg" alt="Quonset interior space"></div>
+      <div class="feat-img"><img loading="lazy" decoding="async" src="assets/interior.jpg" alt="Quonset interior space"></div>
       <div class="feat-body">
         <div class="feat-num">02</div>
         <h3>Clear-span interior</h3>
@@ -312,7 +336,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-siz
       </div>
     </div>
     <div class="feat reveal">
-      <div class="feat-img"><img src="assets/build.jpg" alt="Fast Quonset erection"></div>
+      <div class="feat-img"><img loading="lazy" decoding="async" src="assets/build.jpg" alt="Fast Quonset erection"></div>
       <div class="feat-body">
         <div class="feat-num">03</div>
         <h3>Up in days</h3>
@@ -352,6 +376,73 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-siz
         <h3>Building goes up</h3>
         <p>Most erected in days. Walk in and start using it.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="background:#0a0a0a;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head reveal">
+      <h2>Our <em>work</em></h2>
+      <p>Real steel, real buildings, Manitoba tough. Click any photo to view it full size.</p>
+    </div>
+    <div class="gal-grid">
+      <a class="gal reveal" href="assets/hero.jpg" data-cap="Steel arch Quonset at dusk">
+        <img src="assets/hero.jpg" alt="Steel arch Quonset building at dusk" loading="lazy" decoding="async">
+        <figcaption>Steel arch at dusk</figcaption>
+      </a>
+      <a class="gal reveal d1" href="assets/interior.jpg" data-cap="Clear-span finished interior">
+        <img src="assets/interior.jpg" alt="Finished Quonset interior, clear span" loading="lazy" decoding="async">
+        <figcaption>Clear-span interior</figcaption>
+      </a>
+      <a class="gal reveal d2" href="assets/build.jpg" data-cap="Crew installing a Quonset">
+        <img src="assets/build.jpg" alt="Crew installing Quonset steel panels" loading="lazy" decoding="async">
+        <figcaption>Crew installation</figcaption>
+      </a>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-close" id="lbClose" aria-label="Close photo viewer">&times;</button>
+  <img id="lbImg" src="" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<section id="faq">
+  <div class="container">
+    <div class="sec-head reveal">
+      <h2>Common <em>questions</em></h2>
+      <p>Straight answers, no sales talk.</p>
+    </div>
+    <div class="faq">
+      <details class="reveal">
+        <summary>How much does a Quonset building cost?</summary>
+        <div class="faq-a">Depends on size, options, and whether you want a kit or a full build. Every quote is custom. Tell us what you are building and we will give you a straight number fast.</div>
+      </details>
+      <details class="reveal">
+        <summary>How long does installation take?</summary>
+        <div class="faq-a">Most buildings go up in 2 to 5 days with our crew. DIY kits ship with instructions and go at your pace.</div>
+      </details>
+      <details class="reveal">
+        <summary>Do you deliver kits outside Winnipeg?</summary>
+        <div class="faq-a">Yes. Kits ship anywhere in Manitoba.</div>
+      </details>
+      <details class="reveal">
+        <summary>Are Quonsets warm enough for a Manitoba winter?</summary>
+        <div class="faq-a">The steel shell is rated for minus forty and the curved roof sheds snow on its own. Insulation options are available, ask and we will spec them for your size.</div>
+      </details>
+      <details class="reveal">
+        <summary>Do I need a concrete foundation?</summary>
+        <div class="faq-a">A level gravel pad works for most builds. Some customers pour a slab. We will advise based on your size and site.</div>
+      </details>
+      <details class="reveal">
+        <summary>Do I need a permit?</summary>
+        <div class="faq-a">Most municipalities require a building permit for a structure this size. We will point you to the right office for your area.</div>
+      </details>
+      <details class="reveal">
+        <summary>Can I insulate the building?</summary>
+        <div class="faq-a">Yes. Spray foam and blanket insulation are common options. Ask when you request your quote and we will include it.</div>
+      </details>
     </div>
   </div>
 </section>
@@ -495,6 +586,20 @@ document.querySelectorAll('.count').forEach(el=>cio.observe(el));
 const words=['Garages','Workshops','Barns','Storage','Commercial','Farm Shops','Hangars'];
 const half=words.map(w=>w+' <i>&#9670;</i>').join(' ');
 document.getElementById('marquee').innerHTML='<span>'+half+'</span><span>'+half+'</span>';
+
+// gallery lightbox (anchors still work without JS: they open the image directly)
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap');
+document.querySelectorAll('.gal').forEach(g=>g.addEventListener('click',e=>{
+  e.preventDefault();
+  lbImg.src=g.getAttribute('href');
+  lbImg.alt=g.querySelector('img').alt;
+  lbCap.textContent=g.dataset.cap||'';
+  lb.classList.add('open');document.body.style.overflow='hidden';
+}));
+function closeLb(){lb.classList.remove('open');document.body.style.overflow='';}
+document.getElementById('lbClose').addEventListener('click',closeLb);
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
 
 // quote form: inline validation + mailto fallback (no backend)
 const quoteForm=document.getElementById('quoteForm'),quoteBtn=document.getElementById('quoteBtn');
