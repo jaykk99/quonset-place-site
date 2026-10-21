@@ -166,6 +166,18 @@ section{padding:110px 0}
 .form-ok{display:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,0,0,.5);color:#ffffff;padding:16px;border-radius:12px;margin-bottom:18px;font-weight:600}
 @media(max-width:860px){.contact-grid{grid-template-columns:1fr}.c-card{padding:32px 24px}}
 
+/* jobs */
+.jobs-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}
+.job-role{display:flex;gap:18px;align-items:flex-start;margin-bottom:24px}
+.job-pay{flex:0 0 auto;font-family:'Archivo';font-weight:900;font-size:20px;color:#000000;background:var(--red);border-radius:10px;padding:8px 14px;white-space:nowrap}
+.job-role b{display:block;font-size:18px;margin-bottom:4px}
+.job-role span{color:var(--muted);font-size:15px}
+.apply-list{list-style:none;margin:22px 0 30px}
+.apply-list li{position:relative;padding-left:30px;margin-bottom:14px;color:var(--muted);font-size:16px}
+.apply-list li::before{content:"\2713";position:absolute;left:0;color:var(--red);font-weight:800}
+.apply-ctas{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:860px){.jobs-grid{grid-template-columns:1fr}}
+
 footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-size:14px}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
 </style>
@@ -182,6 +194,7 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-siz
       <a href="#uses">Uses</a>
       <a href="#why">Why Quonsets</a>
       <a href="#process">Process</a>
+      <a href="#jobs">Jobs</a>
       <a href="#contact">Contact</a>
     </div>
     <a href="#contact" class="btn sm nav-cta">Get a Quote</a>
@@ -342,6 +355,40 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-siz
     <h2>Need a building that <em>lasts?</em></h2>
     <p>Free quotes. Straight answers. Serving Winnipeg and all of Manitoba.</p>
     <a href="#contact" class="btn">Start Your Quote</a>
+  </div>
+</section>
+
+<section id="jobs" style="background:#0a0a0a;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="sec-head reveal">
+      <h2>Join the <em>crew</em></h2>
+      <p>We are hiring quoters and crew workers. Real work, fast pay.</p>
+    </div>
+    <div class="jobs-grid">
+      <div class="c-card reveal">
+        <div class="job-role">
+          <div class="job-pay">$25/hr</div>
+          <div><b>Crew Worker</b><span>Build steel buildings. Hands-on work, paid after the customer confirms the job.</span></div>
+        </div>
+        <div class="job-role">
+          <div class="job-pay">$</div>
+          <div><b>Quoter</b><span>Talk to customers, price buildings, close quotes. Paid per quote.</span></div>
+        </div>
+      </div>
+      <div class="c-card reveal d1" style="background:linear-gradient(135deg,rgba(255,0,0,.12),rgba(255,0,0,.03));border-color:rgba(255,0,0,.35)">
+        <h3>Apply</h3>
+        <p>Send your name, the role you want, and any experience.</p>
+        <ul class="apply-list">
+          <li>Email thequonsetplace@hotmail.com with the subject "Crew Application"</li>
+          <li>Or text 204-972-0325 with your name and role</li>
+          <li>Quoters quote. Workers build. Nobody gets paid until the customer confirms.</li>
+        </ul>
+        <div class="apply-ctas">
+          <a class="btn sm" href="mailto:thequonsetplace@hotmail.com?subject=Crew%20Application">Apply by Email</a>
+          <a class="btn sm ghost" href="https://jaykk99.github.io/qp-crew/">Crew Tracker</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
