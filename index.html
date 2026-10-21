@@ -157,6 +157,12 @@ section{padding:110px 0}
 .field input,.field select,.field textarea{width:100%;background:#111111;border:1px solid var(--line);border-radius:10px;color:var(--text);padding:14px 16px;font-size:16px;font-family:'Inter';transition:border-color .25s}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--red)}
 .field textarea{min-height:120px;resize:vertical}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--red)}
+.field .err{display:none;color:#ff8080;font-size:13px;margin-top:6px;font-weight:500}
+.field.invalid .err{display:block}
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:560px){.form-row{grid-template-columns:1fr}}
 .c-info{display:flex;flex-direction:column;gap:22px}
 .info-row{display:flex;gap:18px;align-items:flex-start}
 .info-ic{width:52px;height:52px;flex:0 0 52px;border-radius:14px;background:rgba(255,0,0,.1);border:1px solid rgba(255,0,0,.3);display:flex;align-items:center;justify-content:center;font-size:22px}
@@ -401,19 +407,28 @@ footer{border-top:1px solid var(--line);padding:44px 0;color:var(--dim);font-siz
     <div class="contact-grid">
       <div class="c-card reveal">
         <div class="form-ok" id="formOk">Thanks, your request is in. We will get back to you shortly.</div>
-        <form id="quoteForm">
-          <div class="field"><label>Name</label><input required name="name" placeholder="Your name"></div>
-          <div class="field"><label>Phone</label><input required name="phone" type="tel" placeholder="Your phone number"></div>
-          <div class="field"><label>I need</label>
-            <select name="type">
-              <option>Full custom build</option>
-              <option>Building kit (DIY)</option>
-              <option>Installation of my kit</option>
-              <option>Not sure yet, advise me</option>
-            </select>
+        <form id="quoteForm" novalidate>
+          <div class="field"><label for="qName">Name *</label><input required name="name" id="qName" placeholder="Your name" autocomplete="name" minlength="2" aria-describedby="qNameErr"><div class="err" id="qNameErr" role="alert">Please enter your name.</div></div>
+          <div class="form-row">
+            <div class="field"><label for="qPhone">Phone *</label><input required name="phone" id="qPhone" type="tel" placeholder="Your phone number" autocomplete="tel" inputmode="tel" aria-describedby="qPhoneErr"><div class="err" id="qPhoneErr" role="alert">Please enter a valid phone number.</div></div>
+            <div class="field"><label for="qEmail">Email</label><input name="email" id="qEmail" type="email" placeholder="you@email.com" autocomplete="email" inputmode="email" aria-describedby="qEmailErr"><div class="err" id="qEmailErr" role="alert">That email does not look right.</div></div>
           </div>
-          <div class="field"><label>Details</label><textarea name="details" placeholder="Approx. size, what it is for, where in Manitoba..."></textarea></div>
-          <button class="btn" type="submit" style="width:100%;justify-content:center">Request My Free Quote</button>
+          <div class="form-row">
+            <div class="field"><label for="qType">I need</label>
+              <select name="type" id="qType">
+                <option>Full custom build</option>
+                <option>Building kit (DIY)</option>
+                <option>Installation of my kit</option>
+                <option>Not sure yet, advise me</option>
+              </select>
+            </div>
+            <div class="field"><label for="qSize">Approx. size</label><input name="size" id="qSize" placeholder="e.g. 30x40, or leave blank"></div>
+          </div>
+          <div class="field"><label for="qLoc">Location</label><input name="location" id="qLoc" placeholder="Winnipeg, MB" autocomplete="address-level2"></div>
+          <div class="field"><label for="qDetails">Details</label><textarea name="details" id="qDetails" maxlength="1000" placeholder="What it is for, timeline, anything else..."></textarea></div>
+          <div class="field hp" aria-hidden="true"><label>Leave blank<input name="company" tabindex="-1" autocomplete="off"></label></div>
+          <button class="btn" type="submit" id="quoteBtn" style="width:100%;justify-content:center">Request My Free Quote</button>
+          <p style="font-size:13px;color:var(--dim);margin-top:12px">Opens your email app with the quote ready to send. Or call <a href="tel:+12049720325" style="color:var(--red);font-weight:600">204-972-0325</a>.</p>
         </form>
       </div>
       <div class="c-info">
@@ -481,14 +496,46 @@ const words=['Garages','Workshops','Barns','Storage','Commercial','Farm Shops','
 const half=words.map(w=>w+' <i>&#9670;</i>').join(' ');
 document.getElementById('marquee').innerHTML='<span>'+half+'</span><span>'+half+'</span>';
 
-// quote form -> mailto fallback (no backend)
-document.getElementById('quoteForm').addEventListener('submit',e=>{
+// quote form: inline validation + mailto fallback (no backend)
+const quoteForm=document.getElementById('quoteForm'),quoteBtn=document.getElementById('quoteBtn');
+function setInvalid(el,ok){
+  const field=el.closest('.field');
+  field.classList.toggle('invalid',!ok);
+  el.setAttribute('aria-invalid',String(!ok));
+  return ok;
+}
+function liveCheck(el){el.addEventListener('input',()=>setInvalid(el,checkField(el)));}
+function checkField(el){
+  const v=(el.value||'').trim();
+  if(el.id==='qName')return v.length>=2;
+  if(el.id==='qPhone')return (v.match(/\d/g)||[]).length>=7;
+  if(el.id==='qEmail')return v===''||/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  return true;
+}
+['qName','qPhone','qEmail'].forEach(id=>liveCheck(document.getElementById(id)));
+quoteForm.addEventListener('submit',e=>{
   e.preventDefault();
-  const f=new FormData(e.target);
-  const body='Name: '+f.get('name')+'%0D%0APhone: '+f.get('phone')+'%0D%0AType: '+f.get('type')+'%0D%0ADetails: '+(f.get('details')||'-');
-  location.href='mailto:thequonsetplace@hotmail.com?subject=Quote%20Request%20-%20Quonset%20Place&body='+body;
+  const f=new FormData(quoteForm);
+  if(f.get('company')){return;} // honeypot: bots stay quiet
+  let ok=true;
+  ok=checkField(document.getElementById('qName'))&&ok;
+  ok=checkField(document.getElementById('qPhone'))&&ok;
+  ok=checkField(document.getElementById('qEmail'))&&ok;
+  ['qName','qPhone','qEmail'].forEach(id=>setInvalid(document.getElementById(id),checkField(document.getElementById(id))));
+  if(!ok){document.getElementById('formOk').style.display='none';return;}
+  const lines=[
+    'Name: '+(f.get('name')||'-').trim(),
+    'Phone: '+(f.get('phone')||'-').trim(),
+    'Email: '+(f.get('email')||'-').trim(),
+    'Type: '+f.get('type'),
+    'Size: '+(f.get('size')||'-').trim(),
+    'Location: '+(f.get('location')||'-').trim(),
+    'Details: '+(f.get('details')||'-').trim()
+  ];
+  quoteBtn.disabled=true;quoteBtn.textContent='Opening your email...';
+  location.href='mailto:thequonsetplace@hotmail.com?subject='+encodeURIComponent('Quote Request - Quonset Place')+'&body='+encodeURIComponent(lines.join('\n'));
   document.getElementById('formOk').style.display='block';
-  e.target.reset();
+  setTimeout(()=>{quoteForm.reset();quoteBtn.disabled=false;quoteBtn.textContent='Request My Free Quote';},2000);
 });
 </script>
 </body>
