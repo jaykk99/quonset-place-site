@@ -6,7 +6,13 @@ Business website for **Quonset Place**, custom metal Quonset steel buildings in 
 
 ## Stack
 
-Plain static HTML/CSS/JS in `index.html` with local images in `assets/`. No build step.
+Plain static HTML/CSS/JS. Shared stylesheet in `assets/styles.css`, shared nav/reveal JS in `assets/site.js`, page-specific scripts inline. Local images in `assets/`, including a generated `og-image.jpg` (1200x630) for social cards. No build step.
+
+## Pages
+
+- `index.html` — home: hero, services, uses, why Quonsets, process, service areas, gallery, FAQ, jobs, quote form
+- `builds.html` — building styles, common sizes, options, foundations
+- `404.html` — not-found page (noindex)
 
 ## Run it
 
