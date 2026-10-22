@@ -1,0 +1,1 @@
+{"description":"Quonset Place business website (static, GitHub Pages)","name":"quonset-place-site","private":true,"scripts":{"test":"node tests/site-check.js"},"version":"1.0.0"}
