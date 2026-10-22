@@ -12,7 +12,19 @@ Plain static HTML/CSS/JS. Shared stylesheet in `assets/styles.css`, shared nav/r
 
 - `index.html` — home: hero, services, uses, why Quonsets, process, service areas, gallery, FAQ, jobs, quote form
 - `builds.html` — building styles, common sizes, options, foundations
-- `404.html` — not-found page (noindex)
+- `compare.html` — honest Quonset vs pole barn vs wood-frame vs shipping container comparison, FAQ with FAQPage schema
+- `jobs.html` — hiring page: crew worker ($25/hr) and quoter roles, how applying works
+- `404.html` — not-found page (noindex), full site nav and footer
+
+## Tests
+
+Zero-dependency Node health check (`tests/site-check.js`, `npm test`):
+
+- Every page has title, meta description, canonical, OG/Twitter tags, favicon, skip link, nav, footer
+- JSON-LD blocks parse; internal links and anchors resolve; referenced images exist and are real JPEGs
+- sitemap.xml covers exactly the public pages; robots.txt references the sitemap
+- No placeholder contact details; all mailto links use thequonsetplace@hotmail.com
+- Nav link sets are identical across pages; 404 is noindex; `assets/site.js` passes `node --check`
 
 ## Run it
 
