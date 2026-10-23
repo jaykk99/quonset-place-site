@@ -325,3 +325,5 @@ input[type=range]{width:100%;accent-color:var(--red);height:48px;background:none
 .pv-hint{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:4px 8px;border-radius:6px;pointer-events:none}
 .pv-dim{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;pointer-events:none;white-space:nowrap}
 .door-note{margin:10px 0 2px;padding:10px 12px;border-radius:10px;background:rgba(255,0,0,.08);border:1px solid rgba(255,0,0,.3);color:#f0c0c0;font-size:13px}
+.opt .ic.opt-num{font-family:'Archivo';font-weight:900;font-size:15px;color:var(--red);letter-spacing:3px}
+.use{padding:22px 10px;border-top:2px solid var(--red)}
