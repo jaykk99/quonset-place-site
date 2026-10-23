@@ -192,7 +192,7 @@ section{padding:110px 0}
 .job-role span{color:var(--muted);font-size:15px}
 .apply-list{list-style:none;margin:22px 0 30px}
 .apply-list li{position:relative;padding-left:30px;margin-bottom:14px;color:var(--muted);font-size:16px}
-.apply-list li::before{content:"\2713";position:absolute;left:0;color:var(--red);font-weight:800}
+.apply-list li::before{content:"";position:absolute;left:4px;top:.6em;width:10px;height:2px;background:var(--red)}
 .apply-ctas{display:flex;gap:12px;flex-wrap:wrap}
 @media(max-width:860px){.jobs-grid{grid-template-columns:1fr}}
 
@@ -327,3 +327,5 @@ input[type=range]{width:100%;accent-color:var(--red);height:48px;background:none
 .door-note{margin:10px 0 2px;padding:10px 12px;border-radius:10px;background:rgba(255,0,0,.08);border:1px solid rgba(255,0,0,.3);color:#f0c0c0;font-size:13px}
 .opt .ic.opt-num{font-family:'Archivo';font-weight:900;font-size:15px;color:var(--red);letter-spacing:3px}
 .use{padding:22px 10px;border-top:2px solid var(--red)}
+.shop-trust span{position:relative;padding-left:16px}
+.shop-trust span::before{content:"";position:absolute;left:0;top:.65em;width:8px;height:2px;background:var(--red)}
