@@ -56,7 +56,7 @@ pages.forEach(page => {
   const html = read(page);
   const hrefs = [...html.matchAll(/ (?:href|src)="([^"]+)"/g)].map(m => m[1]);
   hrefs.forEach(href => {
-    if (/^(https?:|mailto:|tel:|data:|#)/.test(href)) {
+    if (/^(https?:|mailto:|tel:|sms:|data:|#)/.test(href)) {
       if (href.startsWith('#')) {
         const id = href.slice(1);
         if (id) ok(idsByPage[page].has(id), `${page}: anchor #${id} has no matching id on page`);
