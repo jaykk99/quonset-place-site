@@ -27,11 +27,11 @@ const PRICING = {
 
 // Ready-to-order packages. Prices are computed from PRICING so they never drift.
 const PACKAGES = [
-  { id: 'garage',  name: 'The Garage',       tag: 'Two-car garage',        w: 20, l: 30, style: 'arch',     endwalls: 2, oh: 1, man: 1, sky: 0, vents: false, insul: false },
-  { id: 'shop',    name: 'The Workshop',     tag: 'Shop + storage',         w: 24, l: 40, style: 'straight', endwalls: 2, oh: 1, man: 1, sky: 2, vents: true,  insul: false },
-  { id: 'farm',    name: 'The Farm Shop',    tag: 'Equipment + work bay',   w: 30, l: 50, style: 'straight', endwalls: 2, oh: 2, man: 1, sky: 2, vents: true,  insul: false },
-  { id: 'machine', name: 'The Machine Shed', tag: 'Combines, trucks, hay',  w: 40, l: 60, style: 'arch',     endwalls: 2, oh: 1, man: 1, sky: 4, vents: true,  insul: false },
-  { id: 'big',     name: 'The Big Shop',     tag: 'Commercial / warehouse', w: 50, l: 80, style: 'high',     endwalls: 2, oh: 2, man: 2, sky: 6, vents: true,  insul: false }
+  { id: 'garage', img: 'hero.jpg', pos: '70% 60%',  name: 'The Garage',       tag: 'Two-car garage',        w: 20, l: 30, style: 'arch',     endwalls: 2, oh: 1, man: 1, sky: 0, vents: false, insul: false },
+  { id: 'shop', img: 'interior.jpg', pos: '50% 50%',    name: 'The Workshop',     tag: 'Shop + storage',         w: 24, l: 40, style: 'straight', endwalls: 2, oh: 1, man: 1, sky: 2, vents: true,  insul: false },
+  { id: 'farm', img: 'build.jpg', pos: '80% 50%',    name: 'The Farm Shop',    tag: 'Equipment + work bay',   w: 30, l: 50, style: 'straight', endwalls: 2, oh: 2, man: 1, sky: 2, vents: true,  insul: false },
+  { id: 'machine', img: 'hero.jpg', pos: '40% 55%', name: 'The Machine Shed', tag: 'Combines, trucks, hay',  w: 40, l: 60, style: 'arch',     endwalls: 2, oh: 1, man: 1, sky: 4, vents: true,  insul: false },
+  { id: 'big', img: 'interior.jpg', pos: '30% 40%',     name: 'The Big Shop',     tag: 'Commercial / warehouse', w: 50, l: 80, style: 'high',     endwalls: 2, oh: 2, man: 2, sky: 6, vents: true,  insul: false }
 ];
 
 const WIDTHS = [20, 24, 30, 40, 50, 60];
@@ -78,6 +78,7 @@ PACKAGES.forEach((p, i) => {
   const el = document.createElement('article');
   el.className = 'pkg reveal' + (i % 3 ? ' d' + (i % 3) : '');
   el.innerHTML =
+    '<figure class="pkg-img"><img src="assets/' + p.img + '" alt="Example of a ' + PRICING.style[p.style].name + ' steel Quonset" loading="lazy" decoding="async" width="1920" height="1280" style="object-position:' + p.pos + '"><figcaption>Example build</figcaption></figure>' +
     '<div class="pkg-top"><span class="pkg-tag">' + p.tag + '</span><span class="pkg-size">' + p.w + '&times;' + p.l + '</span></div>' +
     '<h3>' + p.name + '</h3>' +
     '<ul class="pkg-spec">' +
@@ -131,16 +132,21 @@ function drawPreview() {
     if (cfg.oh) doors += '<rect x="' + (W / 2 - dw / 2) + '" y="' + (base - dh) + '" width="' + dw + '" height="' + dh + '" class="pv-door"/>';
     if (cfg.man) doors += '<rect x="' + (x0 + bw * 0.1) + '" y="' + (base - 7 * scale * 0.9) + '" width="' + (3 * scale) + '" height="' + (7 * scale * 0.9) + '" class="pv-man"/>';
   }
-  const ribs = [];
-  for (let i = 1; i < 6; i++) {
-    const t = i / 6, x = x0 + bw * t;
-    ribs.push('<line x1="' + x + '" y1="' + base + '" x2="' + x + '" y2="' + (base - 4) + '" class="pv-rib"/>');
-  }
   $('preview').innerHTML =
     '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + PRICING.style[cfg.style].name + ' building, ' + cfg.w + ' feet wide">' +
-    '<line x1="10" y1="' + base + '" x2="' + (W - 10) + '" y2="' + base + '" class="pv-ground"/>' +
-    '<path d="' + path + '" class="pv-shell' + (cfg.endwalls ? '' : ' open') + '"/>' + doors + ribs.join('') +
-    '<text x="' + (W / 2) + '" y="' + (base + 16) + '" class="pv-label">' + cfg.w + ' ft wide &times; ' + cfg.l + ' ft long</text>' +
+    '<defs>' +
+      '<linearGradient id="pvSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fbde6"/><stop offset="1" stop-color="#dcebf5"/></linearGradient>' +
+      '<linearGradient id="pvSteel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8d969d"/><stop offset=".35" stop-color="#e3e8eb"/><stop offset=".6" stop-color="#bcc4c9"/><stop offset="1" stop-color="#7e878e"/></linearGradient>' +
+      '<pattern id="pvCorr" width="4" height="6" patternUnits="userSpaceOnUse"><rect width="2" height="6" fill="rgba(0,0,0,.10)"/></pattern>' +
+      '<clipPath id="pvClip"><path d="' + path + '"/></clipPath>' +
+    '</defs>' +
+    '<rect width="' + W + '" height="' + base + '" fill="url(#pvSky)"/>' +
+    '<rect y="' + base + '" width="' + W + '" height="' + (H - base) + '" fill="#6d8a4a"/>' +
+    '<rect y="' + base + '" width="' + W + '" height="3" fill="#5a733c"/>' +
+    '<path d="' + path + '" fill="url(#pvSteel)"' + (cfg.endwalls ? '' : ' fill-opacity=".55"') + ' stroke="#5f676d" stroke-width="1.2"/>' +
+    '<rect x="' + x0 + '" y="' + top + '" width="' + bw + '" height="' + (base - top) + '" fill="url(#pvCorr)" clip-path="url(#pvClip)"/>' +
+    doors +
+    '<text x="' + (W / 2) + '" y="' + (base + 15) + '" class="pv-label">' + cfg.w + ' ft wide &times; ' + cfg.l + ' ft long</text>' +
     '</svg>';
 }
 
