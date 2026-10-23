@@ -53,8 +53,8 @@ function estimate(c, delivery) {
     c.vents ? PRICING.vents : [0, 0],
     c.insul ? add(PRICING.insulation, sqft) : [0, 0]
   );
-  let extra = [0, 0], extraLabel = 'Pickup in Winnipeg';
-  if (delivery === 'deliver') {
+  let extra = [0, 0], extraLabel = '';
+  if (delivery !== 'install') {
     extra = PRICING.delivery.perSqft.map(p => Math.max(PRICING.delivery.min, p * sqft));
     extraLabel = 'Delivery in Manitoba';
   } else if (delivery === 'install') {
@@ -73,7 +73,7 @@ const range = r => money(r[0]) + ' – ' + money(r[1]);
 /* ---------- packages ---------- */
 const pkgGrid = document.getElementById('pkgGrid');
 PACKAGES.forEach((p, i) => {
-  const kit = estimate(p, 'pickup').total;
+  const kit = estimate(p, 'deliver').total;
   const inst = estimate(p, 'install').total;
   const el = document.createElement('article');
   el.className = 'pkg reveal' + (i % 3 ? ' d' + (i % 3) : '');
@@ -85,7 +85,7 @@ PACKAGES.forEach((p, i) => {
       '<li>2 steel endwalls, ' + p.oh + ' overhead door' + (p.oh > 1 ? 's' : '') + ', ' + p.man + ' man door' + (p.man > 1 ? 's' : '') + '</li>' +
       (p.sky ? '<li>' + p.sky + ' skylight panels' + (p.vents ? ', ventilation' : '') + '</li>' : '<li>All hardware + instructions</li>') +
     '</ul>' +
-    '<div class="pkg-price"><span>Kit, est.</span><b>' + range(kit) + '</b></div>' +
+    '<div class="pkg-price"><span>Kit delivered, est.</span><b>' + range(kit) + '</b></div>' +
     '<div class="pkg-price alt"><span>Installed, est.</span><b>' + range(inst) + '</b></div>' +
     '<button class="btn sm" type="button" data-pkg="' + p.id + '">Customize &amp; order</button>';
   pkgGrid.appendChild(el);

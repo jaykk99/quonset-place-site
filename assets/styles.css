@@ -308,5 +308,6 @@ input[type=range]{width:100%;accent-color:var(--red);height:48px;background:none
 .sum-total small{color:var(--muted);font-size:13px}
 .sum-note{font-size:12px;color:var(--dim);margin-top:12px}
 .steps-4{grid-template-columns:repeat(4,1fr)}
+.seg.seg-2{grid-template-columns:repeat(2,1fr)}
 @media(max-width:960px){.cfg{grid-template-columns:1fr}.cfg-summary{position:static}.steps-4{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.seg{grid-template-columns:1fr}.steps-4{grid-template-columns:1fr}.cfg-controls{padding:26px 20px}}
