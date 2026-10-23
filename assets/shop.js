@@ -116,6 +116,8 @@ function setSeg(name, val) {
 }
 
 function drawPreview() {
+  window.qpCfg = cfg;
+  if (window.qp3d) { window.qp3d.update(cfg); return; }
   // front elevation of the chosen profile, scaled to width
   const W = 300, H = 170, base = 150;
   const scale = 240 / 60;                    // 60 ft fills the frame
