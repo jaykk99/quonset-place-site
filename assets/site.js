@@ -7,3 +7,4 @@ navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLink
 // scroll reveals
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+window.qpObserveReveals=root=>root.querySelectorAll('.reveal').forEach(el=>io.observe(el));

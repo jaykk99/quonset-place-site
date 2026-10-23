@@ -155,7 +155,7 @@ pages.forEach(page => {
 {
   const { execSync } = require('child_process');
   try {
-    execSync('node --check ' + path.join(ROOT, 'assets', 'site.js'), { stdio: 'pipe' });
+    ['site.js', 'shop.js'].forEach(f => execSync('node --check ' + path.join(ROOT, 'assets', f), { stdio: 'pipe' }));
   } catch (e) {
     failures.push('assets/site.js: syntax check failed');
   }
