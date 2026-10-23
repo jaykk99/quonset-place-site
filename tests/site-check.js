@@ -8,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const SITE = 'https://jaykk99.github.io/quonset-place-site';
+const SITE = 'https://quonset-place.onrender.com';
 const EXPECTED_EMAIL = 'thequonsetplace@hotmail.com';
 
 const failures = [];
